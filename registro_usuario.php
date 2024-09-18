@@ -5,28 +5,31 @@ $nombre_completo = mysqli_real_escape_string($conexion, $_POST['nombre_completo'
 $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
 $usuario = mysqli_real_escape_string($conexion, $_POST['usuario']);
 $contrasena = mysqli_real_escape_string($conexion, $_POST['contrasena']);
+
+// Hash de la contraseña
 $contrasena = hash('sha512', $contrasena);
 
+// Mostrar el hash de la contraseña para depuración
+echo "Hash de la contraseña al registrarse: " . $contrasena . "<br>";
 
-//verficar correo y usuario
-
-$verficar_correo=mysqli_query($conexion, "SELECT * from usuarios WHERE correo='$correo'");
-
-if(mysqli_num_rows($verficar_correo) > 0){
+// Verificar si el correo ya está registrado
+$verificar_correo = mysqli_query($conexion, "SELECT * FROM usuarios WHERE correo='$correo'");
+if (mysqli_num_rows($verificar_correo) > 0) {
     echo '<script>
-    alert("este correo ya esta registrado,intente con otro");
+    alert("Este correo ya está registrado, intente con otro.");
     window.location.href = "index.php";
     </script>';
-exit();
+    exit();
 }
-$verficar_usuario=mysqli_query($conexion, "SELECT * from usuarios WHERE usuario='$usuario'");
 
-if(mysqli_num_rows($verficar_usuario) > 0){
+// Verificar si el usuario ya está registrado
+$verificar_usuario = mysqli_query($conexion, "SELECT * FROM usuarios WHERE usuario='$usuario'");
+if (mysqli_num_rows($verificar_usuario) > 0) {
     echo '<script>
-    alert("este usuario ya esta registrado, intente con otro");
+    alert("Este usuario ya está registrado, intente con otro.");
     window.location.href = "index.php";
     </script>';
-exit();
+    exit();
 }
 
 $query = "INSERT INTO usuarios(nombre_completo, correo, usuario, contrasena) 
@@ -46,3 +49,4 @@ if ($ejecutar) {
 }
 
 mysqli_close($conexion);
+?>

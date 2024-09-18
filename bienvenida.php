@@ -6,7 +6,7 @@
     <title>bienvenida</title>
 </head>
 <body>
-    <h1>fuck you</h1>
+    <h1>hola mundo</h1>
     <style>
         body{
             background: black;
