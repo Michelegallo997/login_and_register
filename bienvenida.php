@@ -6,7 +6,7 @@
     <title>bienvenida</title>
 </head>
 <body>
-    <h1>hola mundo</h1>
+    <h1>hola mundo2</h1>
     <style>
         body{
             background: black;
